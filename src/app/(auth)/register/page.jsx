@@ -1,8 +1,10 @@
-"use client"
-import React, { useState } from "react";
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaGoogle, FaGithub } from "react-icons/fa";
+"use client";
+import { register } from "@/auth"; 
+import React, { useState, useActionState } from "react";
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
+  const [state, action, isPending] = useActionState(register, undefined);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
@@ -17,7 +19,11 @@ const Register = () => {
           <p className="text-gray-500">Join our community today!</p>
         </div>
 
-        <form className="space-y-6">
+        {/* Error & Success Messages */}
+        {state?.error && <p className="text-red-500">{state.error}</p>}
+        {state?.success && <p className="text-green-500">{state.success}</p>}
+
+        <form className="space-y-6" action={action}>
           {/* Full Name */}
           <div>
             <label className="block text-gray-700 mb-2 font-medium">Full Name</label>
@@ -25,6 +31,7 @@ const Register = () => {
               <FaUser className="text-gray-400" />
               <input 
                 type="text" 
+                name="name"
                 placeholder="John Doe" 
                 className="w-full outline-none bg-transparent"
               />
@@ -38,6 +45,7 @@ const Register = () => {
               <FaEnvelope className="text-gray-400" />
               <input 
                 type="email" 
+                name="email"
                 placeholder="john@example.com" 
                 className="w-full outline-none bg-transparent"
               />
@@ -51,6 +59,7 @@ const Register = () => {
               <FaLock className="text-gray-400" />
               <input 
                 type={showPassword ? "text" : "password"} 
+                name="password"
                 placeholder="••••••••" 
                 className="w-full outline-none bg-transparent"
               />
@@ -71,6 +80,7 @@ const Register = () => {
               <FaLock className="text-gray-400" />
               <input 
                 type={showConfirmPassword ? "text" : "password"} 
+                name="confirmPassword"
                 placeholder="••••••••" 
                 className="w-full outline-none bg-transparent"
               />
@@ -87,41 +97,18 @@ const Register = () => {
           {/* Register Button */}
           <button 
             type="submit" 
+            disabled={isPending}
             className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center gap-2"
           >
-            <FaLock className="text-sm" />
-            Register Now
+            {isPending ? "Registering..." : "Register Now"}
           </button>
         </form>
-
-        {/* Social Login */}
-        <div className="mt-6">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-gray-300"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-gray-500">Or continue with</span>
-            </div>
-          </div>
-
-          <div className="mt-6 grid grid-cols-2 gap-3">
-            <button className="flex items-center justify-center gap-2 bg-white border rounded-lg p-3 hover:bg-gray-50 transition-colors text-gray-600 hover:text-gray-800">
-              <FaGoogle className="text-red-500" />
-              <span>Google</span>
-            </button>
-            <button className="flex items-center justify-center gap-2 bg-white border rounded-lg p-3 hover:bg-gray-50 transition-colors text-gray-600 hover:text-gray-800">
-              <FaGithub className="text-gray-800" />
-              <span>GitHub</span>
-            </button>
-          </div>
-        </div>
 
         {/* Sign In Link */}
         <p className="mt-8 text-center text-gray-500">
           Already have an account?{" "}
           <a href="/login" className="text-purple-600 hover:text-purple-800 font-semibold">
-        Login
+            Login
           </a>
         </p>
       </div>

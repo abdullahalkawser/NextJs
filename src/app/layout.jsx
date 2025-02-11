@@ -1,4 +1,5 @@
 
+
 import "./globals.css";
 
 
@@ -33,7 +34,10 @@ export default function RootLayout({ children }) {
     </div>
   </nav>
 </header>
-<main>        {children}</main>
+<main>     
+ 
+    {children}
+    </main>
 
 
       </body>
