@@ -3,13 +3,13 @@
 
 import { useState, useEffect } from 'react';
 import { getdata } from '@/auth';
-import { useRouter } from 'next/navigation'; // Correct import for next/navigation
+
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const router = useRouter(); // Use useRouter here
+
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -27,10 +27,7 @@ const PostList = () => {
     fetchPosts();
   }, []);
 
-  const handleReadMore = (postId) => {
-    // Navigate to the post detail page
-    router.push(`/post/${postId}`);
-  };
+
 
   if (loading) {
     return (
@@ -65,7 +62,7 @@ const PostList = () => {
               </div>
             </div>
             <div className="mt-6 p-4 bg-indigo-500 text-white text-center rounded-b-lg transition-all duration-200 hover:bg-indigo-400">
-              <button onClick={() => handleReadMore(post._id)} className="px-6 py-3 rounded-full text-lg font-medium">
+              <button  className="px-6 py-3 rounded-full text-lg font-medium">
                 Read More
               </button>
             </div>
