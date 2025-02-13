@@ -24,8 +24,8 @@ export default function RootLayout({ children }) {
         <a href="/register" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 border-b-2 border-transparent hover:border-green-400">
         Register
         </a>
-        <a href="/register" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 border-b-2 border-transparent hover:border-purple-400">
-          About
+        <a href="/post" className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 border-b-2 border-transparent hover:border-purple-400">
+        Create Post
         </a>
         <button className="ml-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:from-purple-600 hover:to-blue-500 transition-all duration-300 shadow-lg hover:shadow-xl">
           Contact
